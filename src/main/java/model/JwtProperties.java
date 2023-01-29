@@ -1,5 +1,5 @@
 package model;
 
 public class JwtProperties {
-public String secret
+public String secret;
 }
