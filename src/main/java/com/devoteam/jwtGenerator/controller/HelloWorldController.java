@@ -3,6 +3,7 @@ package com.devoteam.jwtGenerator.controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -19,11 +20,7 @@ import org.jose4j.keys.HmacKey;
 @RestController
 public class HelloWorldController {
 	
-	@GetMapping("/jwt")
-	public String hello()
-	{
-		return "hello" ;
-	}
+
 	
 	@PostMapping("/attributes")
 	public void attributes()
@@ -32,9 +29,9 @@ public class HelloWorldController {
 		
 		// ajouter le traitement qui genere le jwt token a partir des valeurs recuperer
 		}
-	
-	@PostMapping("/jwths256")
-	public void JWS_HS256(@RequestBody Jwtattributs j) throws Exception {  
+	@ResponseBody
+	@PostMapping(value ="/jwths256",produces="application/json")
+	public Response JWS_HS256(@RequestBody Jwtattributs j) throws Exception {  
 		System.out.println(j.getSecret());
 		//System.out.println(j.getAlg());
 
@@ -86,6 +83,13 @@ public class HelloWorldController {
 		  System.out.println(consumedJWTClaims.toJson());  
 		  System.out.println(jws.getKey());  
 		  System.out.println(jws.getCompactSerialization());
+		  Response r = new Response ();
+		  r.setReponse(jws.getCompactSerialization());
+		  
+		 return r;
+		  
+		
+		  
 		
 		}
 
